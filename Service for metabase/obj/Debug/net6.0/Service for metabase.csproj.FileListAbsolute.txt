@@ -1,0 +1,57 @@
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\appsettings.Development.json
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\appsettings.json
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Service for metabase.staticwebassets.runtime.json
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Service for metabase.exe
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Service for metabase.deps.json
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Service for metabase.runtimeconfig.json
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Service for metabase.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\ref\Service for metabase.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Service for metabase.pdb
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.Relational.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.EntityFrameworkCore.SqlServer.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.Identity.Client.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.IdentityModel.Logging.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\System.Configuration.ConfigurationManager.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\System.Drawing.Common.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\System.Runtime.Caching.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\System.Security.Permissions.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\System.Windows.Extensions.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\EntityLib.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\bin\Debug\net6.0\EntityLib.pdb
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.csproj.AssemblyReference.cache
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.AssemblyInfoInputs.cache
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.AssemblyInfo.cs
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.csproj.CoreCompileInputs.cache
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\staticwebassets.build.json
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\staticwebassets.development.json
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\scopedcss\bundle\Service for metabase.styles.css
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.csproj.CopyComplete
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\ref\Service for metabase.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.pdb
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.genruntimeconfig.cache

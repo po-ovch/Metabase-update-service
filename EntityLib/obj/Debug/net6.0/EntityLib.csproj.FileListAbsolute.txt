@@ -1,0 +1,12 @@
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\bin\Debug\net6.0\EntityLib.deps.json
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\bin\Debug\net6.0\EntityLib.dll
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\bin\Debug\net6.0\ref\EntityLib.dll
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\bin\Debug\net6.0\EntityLib.pdb
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\EntityLib.csproj.AssemblyReference.cache
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\EntityLib.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\EntityLib.AssemblyInfoInputs.cache
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\EntityLib.AssemblyInfo.cs
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\EntityLib.csproj.CoreCompileInputs.cache
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\EntityLib.dll
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\ref\EntityLib.dll
+C:\Users\Polina\source\repos\Service for metabase\EntityLib\obj\Debug\net6.0\EntityLib.pdb
