@@ -1,15 +1,13 @@
-﻿
+﻿using Microsoft.EntityFrameworkCore;
 
-using EntityLib;
-using Microsoft.EntityFrameworkCore;
+namespace EntityLib;
 
-namespace Service_for_metabase.Models
-{
-    public class MetabaseContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<MetabaseProperty> PropertiesInfo { get; set; } = null!;
+        public DbSet<MetabaseSystem> SystemInfo { get; set; } = null!;
 
-        public MetabaseContext(DbContextOptions<MetabaseContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
             Database.EnsureCreated();
@@ -20,6 +18,8 @@ namespace Service_for_metabase.Models
             modelBuilder.Entity<MetabaseProperty>()
                         .HasKey(nameof(MetabaseProperty.DBID),
                                 nameof(MetabaseProperty.PropId));
+            modelBuilder.Entity<MetabaseSystem>()
+                .HasKey(nameof(MetabaseSystem.DBID),
+                    nameof(MetabaseSystem.SystemId));
         }
     }
-}

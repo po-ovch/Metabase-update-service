@@ -14,21 +14,24 @@
         
         public int UpdateStatus { get; set; }
 
-        public override bool Equals(object? obj)
+        public override bool Equals(Object other)
         {
-            return base.Equals(obj);
-        }
-
-        protected bool Equals(MetabaseProperty other)
-        {
-            return DBID == other.DBID && PropId == other.PropId 
-                   && Name == other.Name && Description == other.Description 
-                   && WWWTemplatePage == other.WWWTemplatePage && UpdateStatus == other.UpdateStatus;
+            // TODO пофиксить наллы
+            var otherProperty = (MetabaseProperty) other;
+            return DBID == otherProperty.DBID && PropId == otherProperty.PropId;
         }
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(DBID, PropId, Name, Description, WWWTemplatePage, UpdateStatus);
+            return HashCode.Combine(DBID, PropId);
+        }
+
+        public void Modify(MetabaseProperty property)
+        {
+            Name = property.Name;
+            Description = property.Description;
+            WWWTemplatePage = property.WWWTemplatePage;
+            UpdateStatus = property.UpdateStatus;
         }
     }
 }

@@ -2,11 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
-using Service_for_database.Models;
 
 namespace Service_for_database.Controllers
 {
-    [Route("[controller]")]
     public class DatabaseController : Controller
     {
         private readonly DatabaseContext _dbContext;
@@ -16,16 +14,35 @@ namespace Service_for_database.Controllers
             _dbContext = dbContext;
         }
         
-        [Route("register")]
+        [HttpPost("register")]
         public async Task<HttpResponseMessage> Register()
         {
             using var client = SpecialHttpClient.GetHttpClient();
 		
             return await client.PostAsync($"{Program.MetabaseHost}/register?host={Request.Host}", new StringContent("noContent"));
         }
-        
+
         [HttpGet("properties")]
-        public async Task<ICollection<MetabaseProperty>> SqlQuery()
+        public async Task<ICollection<MetabaseProperty>> GetProperties()
+        {
+            await ExecuteSqlQuery();
+
+            // Получение данных из View.
+            var propertiesList = await _dbContext.PropertiesInfo.ToListAsync();
+            return propertiesList;
+        }
+        
+        [HttpGet("systems")]
+        public async Task<ICollection<MetabaseSystem>> GetSystems()
+        {
+            await ExecuteSqlQuery();
+
+            // Получение данных из View.
+            var propertiesList = await _dbContext.SystemInfo.ToListAsync();
+            return propertiesList;
+        }
+
+        private async Task ExecuteSqlQuery()
         {
             // Скрипт создает или обновляет View.
             string sqlScript;
@@ -44,10 +61,6 @@ namespace Service_for_database.Controllers
                 sqlConnection.Open();
                 command.ExecuteNonQuery();
             }
-
-            // Получение данных из View.
-            var propertiesList = await _dbContext.MetaProperties.ToListAsync();
-            return propertiesList;
         }
         
         [HttpGet("show")]

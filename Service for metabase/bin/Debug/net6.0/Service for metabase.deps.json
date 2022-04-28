@@ -409,6 +409,10 @@
         }
       },
       "EntityLib/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "6.0.4",
+          "Microsoft.EntityFrameworkCore.SqlServer": "6.0.4"
+        },
         "runtime": {
           "EntityLib.dll": {}
         }

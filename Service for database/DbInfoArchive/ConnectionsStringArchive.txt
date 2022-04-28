@@ -1,2 +1,2 @@
-﻿"BandGapConnection": "Server=localhost;Persist Security Info=True;initial catalog=BandGap;Max Pool Size=200;Integrated Security=SSPI;",
-"CrystalConnection": "Server=localhost;Persist Security Info=True;initial catalog=Crystal;Max Pool Size=200;Integrated Security=SSPI;"
+﻿"BandGapConnection": "Server=localhost;initial catalog=BandGap;Integrated Security=SSPI;",
+"CrystalConnection": "Server=localhost;initial catalog=Crystal;Integrated Security=SSPI;"

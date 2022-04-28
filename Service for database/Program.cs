@@ -1,5 +1,5 @@
+using EntityLib;
 using Microsoft.EntityFrameworkCore;
-using Service_for_database.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,5 +38,5 @@ app.Run();
 internal partial class Program
 {
 	public static string DbConnectionString = null!;
-	public static string MetabaseHost = "https://localhost:7187";
+	public const string MetabaseHost = "https://localhost:7187";
 }

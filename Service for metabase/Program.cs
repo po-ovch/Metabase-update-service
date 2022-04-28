@@ -1,9 +1,10 @@
+using EntityLib;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Service_for_metabase.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<MetabaseContext>(options =>
+builder.Services.AddDbContext<DatabaseContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("MetabaseConnection"));
 });
