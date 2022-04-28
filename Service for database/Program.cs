@@ -1,7 +1,28 @@
-using EntityLib;
 using Microsoft.EntityFrameworkCore;
+using Service_for_database.Model;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+	.AddJwtBearer(options =>
+	{
+		options.RequireHttpsMetadata = true;
+		options.TokenValidationParameters = new TokenValidationParameters()
+		{
+			ValidateIssuer = true,
+			ValidIssuer = AuthenticationOptions.Issuer,
+			
+			ValidateAudience = true,
+			ValidAudience = AuthenticationOptions.Audience,
+			
+			ValidateLifetime = true,
+
+			ValidateIssuerSigningKey = true,
+			IssuerSigningKey = AuthenticationOptions.GetSymmetricSecurityKey()
+		};
+	});
 
 DbConnectionString = builder.Configuration.GetConnectionString("DatabaseConnection");
 builder.Services.AddDbContext<DatabaseContext>(options =>
@@ -27,6 +48,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -38,5 +60,4 @@ app.Run();
 internal partial class Program
 {
 	public static string DbConnectionString = null!;
-	public const string MetabaseHost = "https://localhost:7187";
 }

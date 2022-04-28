@@ -1,37 +1,38 @@
-﻿using EntityLib;
+﻿using System.Net.Http.Headers;
+using EntityLib;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Service_for_metabase.Model;
 
 namespace Service_for_metabase.Controllers
 {
+    [Authorize]
     public class MetabaseController : Controller
     {
-        private static ICollection<string> _dbServicesUrls = new List<string>();
-        private readonly DatabaseContext _metabaseContext;
+        private readonly MetabaseContext _metabaseContext;
 
-        public MetabaseController(DatabaseContext metabaseContext)
+        public MetabaseController(MetabaseContext metabaseContext)
         {
             _metabaseContext = metabaseContext;
-        }
-
-        [HttpPost("register")]
-        public ActionResult Register([FromQuery(Name = "host")] string dbServiceUrl)
-        {
-            _dbServicesUrls.Add("https://" + dbServiceUrl);
-            return Ok();
         }
         
         [HttpPut("update")]
         public async Task<IActionResult> Update()
         {
             using var client = SpecialHttpClient.GetHttpClient();
+            client.DefaultRequestHeaders.Authorization = 
+                new AuthenticationHeaderValue("Bearer", TokenGenerator.GetToken(User.Claims));
 
-            foreach (var dbServiceUrl in _dbServicesUrls)
+            var dbServicesUrls = (await _metabaseContext.DBInfo.ToListAsync())
+                .Select(info => info.DBServiceHost)
+                .Where(host => host is not null);
+            foreach (var dbServiceUrl in dbServicesUrls)
             {
-                await UpdateProperties(client, dbServiceUrl);
-                await UpdateSystems(client, dbServiceUrl);
+                await UpdateProperties(client, dbServiceUrl!);
+                await UpdateSystems(client, dbServiceUrl!);
             }
-
+            
             return Ok();
         }
 
@@ -60,7 +61,7 @@ namespace Service_for_metabase.Controllers
             {
                 var foundProp = updMetabaseProperties.Find(mProp =>
                     mProp.DBID == prop.DBID && mProp.PropId == prop.PropId);
-                var modifyingProperty  = _metabaseContext.PropertiesInfo.Update(foundProp).Entity;
+                var modifyingProperty  = _metabaseContext.PropertiesInfo.Update(foundProp!).Entity;
                 modifyingProperty.Modify(prop);
             }
             await _metabaseContext.SaveChangesAsync();
@@ -69,9 +70,8 @@ namespace Service_for_metabase.Controllers
         private async Task UpdateSystems(HttpClient client, string dbServiceUrl)
         {
             var dbUrl =  dbServiceUrl + "/systems";
-            var dbSystemsI = (await client.GetAsync(dbUrl))
-                .Content;
-            var dbSystems    = await dbSystemsI
+            var dbSystems = await (await client.GetAsync(dbUrl))
+                .Content
                 .ReadFromJsonAsync<List<MetabaseSystem>>();
 
             if (dbSystems is null)
@@ -92,7 +92,7 @@ namespace Service_for_metabase.Controllers
             {
                 var foundSys = updMetabaseSystems.Find(mProp =>
                     mProp.DBID == system.DBID && mProp.SystemId == system.SystemId);
-                var modifyingSystem  = _metabaseContext.SystemInfo.Update(foundSys).Entity;
+                var modifyingSystem  = _metabaseContext.SystemInfo.Update(foundSys!).Entity;
                 modifyingSystem.Modify(system);
             }
             await _metabaseContext.SaveChangesAsync();

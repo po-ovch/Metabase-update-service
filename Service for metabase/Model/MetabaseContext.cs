@@ -1,13 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using EntityLib;
+using Microsoft.EntityFrameworkCore;
 
-namespace EntityLib;
+namespace Service_for_metabase.Model;
 
-    public class DatabaseContext : DbContext
+    public class MetabaseContext : DbContext
     {
         public DbSet<MetabaseProperty> PropertiesInfo { get; set; } = null!;
         public DbSet<MetabaseSystem> SystemInfo { get; set; } = null!;
 
-        public DatabaseContext(DbContextOptions<DatabaseContext> options)
+        public DbSet<MetabaseDb> DBInfo { get; set; } = null!;
+
+        public MetabaseContext(DbContextOptions<MetabaseContext> options)
             : base(options)
         {
             Database.EnsureCreated();

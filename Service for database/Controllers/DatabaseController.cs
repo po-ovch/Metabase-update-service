@@ -1,10 +1,13 @@
 ﻿using EntityLib;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
+using Service_for_database.Model;
 
 namespace Service_for_database.Controllers
 {
+    [Authorize]
     public class DatabaseController : Controller
     {
         private readonly DatabaseContext _dbContext;
@@ -14,14 +17,6 @@ namespace Service_for_database.Controllers
             _dbContext = dbContext;
         }
         
-        [HttpPost("register")]
-        public async Task<HttpResponseMessage> Register()
-        {
-            using var client = SpecialHttpClient.GetHttpClient();
-		
-            return await client.PostAsync($"{Program.MetabaseHost}/register?host={Request.Host}", new StringContent("noContent"));
-        }
-
         [HttpGet("properties")]
         public async Task<ICollection<MetabaseProperty>> GetProperties()
         {
@@ -61,12 +56,6 @@ namespace Service_for_database.Controllers
                 sqlConnection.Open();
                 command.ExecuteNonQuery();
             }
-        }
-        
-        [HttpGet("show")]
-        public async Task<IActionResult> DatabaseProperties()
-        {
-            return null;
         }
     }
 }

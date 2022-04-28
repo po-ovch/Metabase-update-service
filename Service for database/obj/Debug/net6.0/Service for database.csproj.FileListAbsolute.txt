@@ -56,3 +56,4 @@ C:\Users\Polina\source\repos\Service for metabase\Service for database\bin\Debug
 C:\Users\Polina\source\repos\Service for metabase\Service for database\obj\Debug\net6.0\Service for database.csproj.CopyComplete
 C:\Users\Polina\source\repos\Service for metabase\Service for database\obj\Debug\net6.0\Service for database.genruntimeconfig.cache
 C:\Users\Polina\source\repos\Service for metabase\Service for database\bin\Debug\net6.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\Polina\source\repos\Service for metabase\Service for database\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll

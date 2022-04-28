@@ -1,10 +1,16 @@
-using EntityLib;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
+using Service_for_metabase.Model;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddDbContext<DatabaseContext>(options =>
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+	.AddCookie(options =>
+	{
+		options.LoginPath = new PathString("/authentication");
+	});
+
+builder.Services.AddDbContext<MetabaseContext>(options =>
 {
 	options.UseSqlServer(builder.Configuration.GetConnectionString("MetabaseConnection"));
 });
@@ -27,6 +33,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
