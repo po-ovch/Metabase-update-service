@@ -1,0 +1,31 @@
+@model dynamic
+
+@{
+    Layout = null;
+}
+
+<head>
+    <link rel="stylesheet" href="css/table-style.css">
+</head>
+
+<table class="table">
+	<thead>
+	<tr>
+		@foreach (var @column in @ViewBag.Columns)
+		{
+			<th>@column.Name</th>
+		}
+	</tr>
+	</thead>
+	<tbody>
+	@foreach (var @item in @ViewBag.Items)
+	{
+		<tr>
+		@foreach (var @column in @ViewBag.Columns)
+		{
+			<td>@column.GetValue(@item)</td>
+		}
+		</tr>
+	}
+	</tbody>
+</table>

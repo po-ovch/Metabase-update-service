@@ -36,6 +36,24 @@ namespace Service_for_metabase.Controllers
             return Ok();
         }
 
+        [HttpGet("/properties")]
+        public async Task<IActionResult> GetProperties()
+        {
+            var properties = await _metabaseContext.PropertiesInfo.ToListAsync();
+            ViewBag.Columns = typeof(MetabaseProperty).GetProperties();
+            ViewBag.Items = properties;
+            return View("ShowTable");
+        }
+        
+        [HttpGet("/systems")]
+        public async Task<IActionResult> GetSystems()
+        {
+            var systems = await _metabaseContext.SystemInfo.ToListAsync();
+            ViewBag.Columns = typeof(MetabaseSystem).GetProperties();
+            ViewBag.Items = systems;
+            return View("ShowTable");
+        }
+
         private async Task UpdateProperties(HttpClient client, string dbServiceUrl)
         {
             var dbUrl =  dbServiceUrl + "/properties";
