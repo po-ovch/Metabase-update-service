@@ -1,0 +1,26 @@
+@model Service_for_metabase.Model.ServiceUserModel
+
+@{
+    ViewData["Title"] = "Login";
+}
+<head>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+<h1>Metabase service</h1>
+<h3>Вход</h3>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+    <div>
+        <p>@Html.ValidationMessageFor(m => m.Username)</p>
+         <label >Имя пользователя:</label><br/>
+        @Html.EditorFor(model => model.Username)
+    </div>
+    <div>
+        <p>@Html.ValidationMessageFor(m => m.Password)</p>
+        <label >Пароль:</label><br/>
+        @Html.PasswordFor(model => model.Password)
+    </div>
+    <input type="submit" value="Войти"/>
+}

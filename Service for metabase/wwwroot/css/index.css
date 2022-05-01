@@ -1,0 +1,29 @@
+/* CSS styles */
+ul {
+  padding: 0;
+  list-style-type: none;
+  width: 400px;
+  position: absolute;
+  margin-left: 23%;
+  margin-top: 16%;
+}
+li {
+
+  padding: 5px
+}
+a {
+  background-color: #9CC97F;
+  color: #21282B;
+  padding: 16px;
+  text-decoration: none;
+  border-radius: 8px;
+  display: block;
+  font-family: Arial, serif;
+  text-align: center;
+  font-size: 17px
+}
+a:hover {
+  background-color:#CDA2B4;
+
+} 
+

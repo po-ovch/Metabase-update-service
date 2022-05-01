@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 	.AddCookie(options =>
 	{
-		options.LoginPath = new PathString("/authentication");
+		options.LoginPath = new PathString("/login");
 	});
 
 builder.Services.AddDbContext<MetabaseContext>(options =>
@@ -38,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Metabase}/{action=Index}/");
+	pattern: "{controller=Home}/{action=Index}");
 
 app.Run();

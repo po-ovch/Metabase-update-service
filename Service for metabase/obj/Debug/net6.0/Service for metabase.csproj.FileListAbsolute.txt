@@ -55,3 +55,5 @@ C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug
 C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\ref\Service for metabase.dll
 C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.pdb
 C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.genruntimeconfig.cache
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.RazorAssemblyInfo.cache
+C:\Users\Polina\source\repos\Service for metabase\Service for metabase\obj\Debug\net6.0\Service for metabase.RazorAssemblyInfo.cs
