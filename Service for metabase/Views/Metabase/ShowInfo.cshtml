@@ -1,0 +1,7 @@
+@model dynamic
+
+@{
+    Layout = "_Layout";
+}
+
+@await Html.PartialAsync("_Table", ViewBag.TableModel, null);

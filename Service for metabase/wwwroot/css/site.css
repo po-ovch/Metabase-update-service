@@ -1,0 +1,30 @@
+html {
+  font-size: 14px;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.service-name {
+  color: #21282B;
+  text-decoration: none;
+  font-size: 20px;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.header-bg{
+  background-color: #00DABE;
+}

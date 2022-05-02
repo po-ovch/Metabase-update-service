@@ -1,29 +1,35 @@
 /* CSS styles */
-ul {
+#menu {
   padding: 0;
   list-style-type: none;
   width: 400px;
   position: absolute;
-  margin-left: 23%;
-  margin-top: 16%;
+  margin-left: 27%;
+  margin-top: 10%;
 }
-li {
-
+.menuitem {
   padding: 5px
 }
-a {
+.menu-reference {
   background-color: #9CC97F;
   color: #21282B;
   padding: 16px;
   text-decoration: none;
   border-radius: 8px;
   display: block;
-  font-family: Arial, serif;
+  font-family: "Gill Sans", sans-serif;
   text-align: center;
   font-size: 17px
 }
-a:hover {
+.menu-reference:hover {
   background-color:#CDA2B4;
+  color: #21282B;
+}
 
-} 
+.menu-header {
+  position: absolute;
+  margin-left: 31%;
+  margin-top: 3%;
+  font-family: Arial, serif;
+}
 

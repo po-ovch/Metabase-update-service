@@ -17,9 +17,12 @@ namespace Service_for_metabase.Controllers
             _metabaseContext = metabaseContext;
         }
         
-        [HttpPut("update")]
+        [HttpGet("update")]
         public async Task<IActionResult> Update()
         {
+            var updatedProperties = new List<MetabaseProperty>();
+            var updatedSystems = new List<MetabaseSystem>();
+            
             using var client = SpecialHttpClient.GetHttpClient();
             client.DefaultRequestHeaders.Authorization = 
                 new AuthenticationHeaderValue("Bearer", TokenGenerator.GetToken(User.Claims));
@@ -29,32 +32,33 @@ namespace Service_for_metabase.Controllers
                 .Where(host => host is not null);
             foreach (var dbServiceUrl in dbServicesUrls)
             {
-                await UpdateProperties(client, dbServiceUrl!);
-                await UpdateSystems(client, dbServiceUrl!);
+                updatedProperties.AddRange(await UpdateProperties(client, dbServiceUrl!));
+                updatedSystems.AddRange(await UpdateSystems(client, dbServiceUrl!));
             }
-            
-            return Ok();
+
+            ViewBag.PropertiesTableModel = TableModel<MetabaseProperty>.BuildModel(updatedProperties);
+            ViewBag.SystemsTableModel = TableModel<MetabaseSystem>.BuildModel(updatedSystems);
+
+            return View("ShowUpdate");
         }
 
         [HttpGet("/properties")]
         public async Task<IActionResult> GetProperties()
         {
             var properties = await _metabaseContext.PropertiesInfo.ToListAsync();
-            ViewBag.Columns = typeof(MetabaseProperty).GetProperties();
-            ViewBag.Items = properties;
-            return View("ShowTable");
+            ViewBag.TableModel = TableModel<MetabaseProperty>.BuildModel(properties);
+            return View("ShowInfo");
         }
         
         [HttpGet("/systems")]
         public async Task<IActionResult> GetSystems()
         {
             var systems = await _metabaseContext.SystemInfo.ToListAsync();
-            ViewBag.Columns = typeof(MetabaseSystem).GetProperties();
-            ViewBag.Items = systems;
-            return View("ShowTable");
+            ViewBag.TableModel = TableModel<MetabaseSystem>.BuildModel(systems);
+            return View("ShowInfo");
         }
 
-        private async Task UpdateProperties(HttpClient client, string dbServiceUrl)
+        private async Task<List<MetabaseProperty>> UpdateProperties(HttpClient client, string dbServiceUrl)
         {
             var dbUrl =  dbServiceUrl + "/properties";
             var dbProperties = await (await client.GetAsync(dbUrl))
@@ -83,9 +87,14 @@ namespace Service_for_metabase.Controllers
                 modifyingProperty.Modify(prop);
             }
             await _metabaseContext.SaveChangesAsync();
+
+            var newProperties = new List<MetabaseProperty>();
+            newProperties.AddRange(propsToAdd);
+            newProperties.AddRange(propsToEdit);
+            return newProperties;
         }
         
-        private async Task UpdateSystems(HttpClient client, string dbServiceUrl)
+        private async Task<List<MetabaseSystem>> UpdateSystems(HttpClient client, string dbServiceUrl)
         {
             var dbUrl =  dbServiceUrl + "/systems";
             var dbSystems = await (await client.GetAsync(dbUrl))
@@ -114,6 +123,11 @@ namespace Service_for_metabase.Controllers
                 modifyingSystem.Modify(system);
             }
             await _metabaseContext.SaveChangesAsync();
+
+            var newSystems = new List<MetabaseSystem>();
+            newSystems.AddRange(systemsToAdd);
+            newSystems.AddRange(systemsToEdit);
+            return newSystems;
         }
     }
 }

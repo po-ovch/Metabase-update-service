@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Html
+@model dynamic
+
+<head>
+    <link rel="stylesheet" href="css/table-style.css">
+</head>
+
+<table class="items-table">
+    <thead>
+    <tr>
+        @foreach (var column in @Model.Columns)
+        {
+            <th class="th-style">@column.Name</th>
+        }
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in @Model.Items)
+    {
+        <tr>
+            @foreach (var column in @Model.Columns)
+            {
+                @if (column.Name == "SystemInfo" && column.GetValue(item) != null)
+                {
+                    <td>
+                        @{
+                            var html = new HtmlString(@column.GetValue(item).ToString());
+                        }
+                        @html
+                    </td>
+                }
+                else
+                {
+                    <td>@column.GetValue(item)</td>
+                }
+            }
+        </tr>
+    }
+    </tbody>
+</table>

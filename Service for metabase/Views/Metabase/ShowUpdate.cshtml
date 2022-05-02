@@ -1,0 +1,14 @@
+@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>title</h2>
+
+<h3>Таблица свойств</h3>
+@await Html.PartialAsync("_Table", ViewBag.PropertiesTableModel, null)
+
+<h3>Таблица систем</h3>
+@await Html.PartialAsync("_Table", ViewBag.SystemsTableModel, null)
