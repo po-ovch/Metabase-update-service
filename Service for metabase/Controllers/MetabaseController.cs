@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using System.Net;
+using System.Net.Http.Headers;
 using EntityLib;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -71,18 +72,48 @@ namespace Service_for_metabase.Controllers
         [HttpGet("/activeServices")]
         public async Task<IActionResult> GetActivatedServices()
         {
-            using var client = SpecialHttpClient.GetHttpClient();
+            var activeServices = new List<string>();
+            var databases = await _metabaseContext.DBInfo.ToListAsync();
+            const string checkEndpoint = "/check";
             
-            var dbServicesUrls = (await _metabaseContext.DBInfo.ToListAsync())
-                .Select(info => info.DBServiceHost)
-                .Where(host => host is not null);
-            return null;
+            using var client = SpecialHttpClient.GetHttpClient();
+            var servicesUrls = databases
+                .Select(db => db.DBServiceHost)
+                .Where(url => url != null);
+            foreach (var serviceUrl in servicesUrls)
+            {
+                try {
+                    var responseCode = (await client.GetAsync(serviceUrl + checkEndpoint)).StatusCode;
+                    if (responseCode is HttpStatusCode.OK)
+                    {
+                        activeServices.Add(serviceUrl);
+                    }
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+
+            ViewBag.TableModel = TableModel<DatabaseModel>.BuildModel(databases
+                .Where(db => activeServices.Contains(db.DBServiceHost))
+                .Select(DatabaseModel.FromMetabaseDb));
+            return View("ShowActiveServices");
         }
 
         [HttpGet("/properties")]
         public async Task<IActionResult> GetProperties()
         {
-            var properties = await _metabaseContext.PropertiesInfo.ToListAsync();
+            List<MetabaseProperty> properties;
+            try
+            {
+                properties = await _metabaseContext.PropertiesInfo.ToListAsync();
+            }
+            catch
+            {
+                return NotFound();
+            }
+
             ViewBag.TableModel = TableModel<MetabaseProperty>.BuildModel(properties);
             return View("ShowInfo");
         }
@@ -90,7 +121,16 @@ namespace Service_for_metabase.Controllers
         [HttpGet("/systems")]
         public async Task<IActionResult> GetSystems()
         {
-            var systems = await _metabaseContext.SystemInfo.ToListAsync();
+            List<MetabaseSystem> systems;
+            try
+            {
+                systems = await _metabaseContext.SystemInfo.ToListAsync();
+            }
+            catch
+            {
+                return NotFound();
+            }
+
             ViewBag.TableModel = TableModel<MetabaseSystem>.BuildModel(systems);
             return View("ShowInfo");
         }

@@ -28,7 +28,16 @@ public class AccountController : Controller
 		}
 		if (ModelState.IsValid)
 		{
-			var user = GetUser(userModel.Username, userModel.Password);
+			ServiceUser? user;
+			try
+			{
+				user = GetUser(userModel.Username, userModel.Password);
+			}
+			catch
+			{
+				return NotFound();
+			}
+
 			if (user is not null)
 			{
 				await Authenticate(user);
@@ -39,18 +48,6 @@ public class AccountController : Controller
 		}
 
 		return View(userModel);
-	}
-
-	[Route("/block")]
-	public ActionResult ForbidResult()
-	{
-		return Problem(
-			type: "/docs/errors/forbidden",
-			title: "Authenticated user is not authorized.",
-			detail: $"Hii",
-			statusCode: StatusCodes.Status403Forbidden,
-			instance: HttpContext.Request.Path
-		);
 	}
 
 	[Route("/logout")]
@@ -83,27 +80,5 @@ public class AccountController : Controller
 		var foundUser = users!.Find(user => user.Username == username && user.Password == password);
 
 		return foundUser;
-	}
-
-	[Route("/create-users")]
-	public void SaveUsers()
-	{
-		var first = new ServiceUser()
-		{
-			Username = "Admin",
-			Password = "12345",
-			Role = "admin"
-		};
-		
-		var second = new ServiceUser()
-		{
-			Username = "SimpleUser",
-			Password = "11111",
-			Role = "user"
-		};
-
-		var list = new List<ServiceUser>() {first, second};
-		var fs = new FileStream("Resources/usersInfo.txt", FileMode.OpenOrCreate);
-		JsonSerializer.Serialize(fs, list);
 	}
 }

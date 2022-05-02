@@ -16,6 +16,7 @@ namespace Service_for_database.Controllers
             _dbContext = dbContext;
         }
 
+        [HttpGet("/check")]
         public async Task<IActionResult> Check()
         {
             try

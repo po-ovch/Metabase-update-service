@@ -1,0 +1,17 @@
+@model dynamic
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Подключенные базы данных</h2>
+
+@if (Enumerable.Count(ViewBag.TableModel.Items) > 0)
+{
+    @await Html.PartialAsync("_Table", ViewBag.TableModel, null)
+}
+else
+{
+    <p> Нет активных баз данных :(</p>
+}
