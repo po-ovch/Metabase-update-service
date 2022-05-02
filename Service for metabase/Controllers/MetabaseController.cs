@@ -27,24 +27,56 @@ namespace Service_for_metabase.Controllers
         {
             var updatedProperties = new List<MetabaseProperty>();
             var updatedSystems = new List<MetabaseSystem>();
-            
+            var unsuccessfulUpdatesUrls = new List<string>();
+            List<MetabaseDb> databases;
+
             using var client = SpecialHttpClient.GetHttpClient();
             client.DefaultRequestHeaders.Authorization = 
                 new AuthenticationHeaderValue("Bearer", TokenGenerator.GetToken(User.Claims));
+            
+            try
+            {
+                databases = await _metabaseContext.DBInfo.ToListAsync();
+            }
+            catch
+            {
+                return NotFound();
+            }
 
-            var dbServicesUrls = (await _metabaseContext.DBInfo.ToListAsync())
+            var dbServicesUrls = databases
                 .Select(info => info.DBServiceHost)
                 .Where(host => host is not null);
             foreach (var dbServiceUrl in dbServicesUrls)
             {
-                updatedProperties.AddRange(await UpdateProperties(client, dbServiceUrl!));
-                updatedSystems.AddRange(await UpdateSystems(client, dbServiceUrl!));
+                try
+                {
+                    updatedProperties.AddRange(await UpdateProperties(client, dbServiceUrl!));
+                    updatedSystems.AddRange(await UpdateSystems(client, dbServiceUrl!));
+                }
+                catch (Exception)
+                {
+                    unsuccessfulUpdatesUrls.Add(dbServiceUrl!);
+                }
             }
 
             ViewBag.PropertiesTableModel = TableModel<MetabaseProperty>.BuildModel(updatedProperties);
             ViewBag.SystemsTableModel = TableModel<MetabaseSystem>.BuildModel(updatedSystems);
+            ViewBag.UnsuccessfulUpdates = databases
+                .Where(db => unsuccessfulUpdatesUrls.Contains(db.DBServiceHost!))
+                .Select(db => db.Name);
 
             return View("ShowUpdate");
+        }
+
+        [HttpGet("/activeServices")]
+        public async Task<IActionResult> GetActivatedServices()
+        {
+            using var client = SpecialHttpClient.GetHttpClient();
+            
+            var dbServicesUrls = (await _metabaseContext.DBInfo.ToListAsync())
+                .Select(info => info.DBServiceHost)
+                .Where(host => host is not null);
+            return null;
         }
 
         [HttpGet("/properties")]

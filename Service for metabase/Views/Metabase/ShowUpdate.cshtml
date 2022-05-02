@@ -5,10 +5,27 @@
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<h2>Результаты обновления метабазы</h2>
 
-<h3>Таблица свойств</h3>
-@await Html.PartialAsync("_Table", ViewBag.PropertiesTableModel, null)
+@if (Enumerable.Count(ViewBag.UnsuccessfulUpdates)> 0)
+{
+    <p>Не получилось взять обновления из следующих баз данных:</p>
+    <ul>
+        @foreach (var mistake in ViewBag.UnsuccessfulUpdates)
+        {
+            <li style="color: red">@mistake</li>
+        }
+    </ul>
+}
 
-<h3>Таблица систем</h3>
-@await Html.PartialAsync("_Table", ViewBag.SystemsTableModel, null)
+@if (Enumerable.Count(ViewBag.PropertiesTableModel.Items) > 0)
+{
+    <h3>Добавленные свойства</h3>
+    @await Html.PartialAsync("_Table", ViewBag.PropertiesTableModel, null)
+}
+
+@if (Enumerable.Count(ViewBag.SystemsTableModel.Items) > 0)
+{
+    <h3>Добавленные системы</h3>
+    @await Html.PartialAsync("_Table", ViewBag.SystemsTableModel, null)
+}

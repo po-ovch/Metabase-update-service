@@ -7,7 +7,6 @@ using Service_for_database.Model;
 
 namespace Service_for_database.Controllers
 {
-    [Authorize]
     public class DatabaseController : Controller
     {
         private readonly DatabaseContext _dbContext;
@@ -16,25 +15,63 @@ namespace Service_for_database.Controllers
         {
             _dbContext = dbContext;
         }
-        
-        [HttpGet("properties")]
-        public async Task<ICollection<MetabaseProperty>> GetProperties()
-        {
-            await ExecuteSqlQuery();
 
-            // Получение данных из View.
-            var propertiesList = await _dbContext.PropertiesInfo.ToListAsync();
+        public async Task<IActionResult> Check()
+        {
+            try
+            {
+                await ExecuteSqlQuery();
+            }
+            catch (Exception exception)
+            {
+                return Problem(
+                    type: exception.GetType().ToString(),
+                    title: "Data base connection problem.",
+                    detail: exception.Message,
+                    statusCode: StatusCodes.Status404NotFound,
+                    instance: HttpContext.Request.Path
+                );
+            }
+
+            return Ok();
+        }
+        
+        [Authorize]
+        [HttpGet("properties")]
+        public async Task<ICollection<MetabaseProperty>?> GetProperties()
+        {
+            List<MetabaseProperty> propertiesList;
+            try
+            {
+                await ExecuteSqlQuery();
+
+                // Получение данных из View.
+                propertiesList = await _dbContext.PropertiesInfo.ToListAsync();
+            } catch (Exception)
+            {
+                return null;
+            }
+
             return propertiesList;
         }
         
+        [Authorize]
         [HttpGet("systems")]
-        public async Task<ICollection<MetabaseSystem>> GetSystems()
+        public async Task<ICollection<MetabaseSystem>?> GetSystems()
         {
-            await ExecuteSqlQuery();
+            List<MetabaseSystem> systemsList;
+            try
+            {
+                await ExecuteSqlQuery();
 
-            // Получение данных из View.
-            var propertiesList = await _dbContext.SystemInfo.ToListAsync();
-            return propertiesList;
+                // Получение данных из View.
+                systemsList = await _dbContext.SystemInfo.ToListAsync();
+            } catch (Exception)
+            {
+                return null;
+            }
+
+            return systemsList;
         }
 
         private async Task ExecuteSqlQuery()
