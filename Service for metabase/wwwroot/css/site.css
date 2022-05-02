@@ -25,6 +25,11 @@ body {
   padding-left: 10px;
 }
 
-.header-bg{
+.header-bg {
   background-color: #00DABE;
+}
+
+.logout { 
+  position: absolute;
+  margin-left: 80%;
 }

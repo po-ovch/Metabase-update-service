@@ -17,6 +17,11 @@ namespace Service_for_metabase.Controllers
             _metabaseContext = metabaseContext;
         }
         
+        public ActionResult Index()
+        {
+            return View();
+        }
+        
         [HttpGet("update")]
         public async Task<IActionResult> Update()
         {

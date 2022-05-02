@@ -38,6 +38,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
 	name: "default",
-	pattern: "{controller=Account}/{action=Index}");
+	pattern: "{controller=Metabase}/{action=Index}");
 
 app.Run();

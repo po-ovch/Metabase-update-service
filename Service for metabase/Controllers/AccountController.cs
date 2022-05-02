@@ -12,30 +12,33 @@ public class AccountController : Controller
 	[HttpGet("/login")]
 	public IActionResult Login()
 	{
+		if (User.Identity is {IsAuthenticated: true})
+		{
+			return RedirectToAction("Index", "Metabase");
+		}
 		return View();
 	}
 	
 	[HttpPost("/login")]
 	public async Task<IActionResult> Login(ServiceUserModel userModel)
 	{
+		if (User.Identity is {IsAuthenticated: true})
+		{
+			return RedirectToAction("Index", "Metabase");
+		}
 		if (ModelState.IsValid)
 		{
 			var user = GetUser(userModel.Username, userModel.Password);
 			if (user is not null)
 			{
 				await Authenticate(user);
-				return RedirectToAction("Index");
+				return RedirectToAction("Index", "Metabase");
 			}
 			ModelState.AddModelError("", "Некорректные имя пользователя" +
 			                             " и(или) пароль");
 		}
 
 		return View(userModel);
-	}
-
-	public ActionResult Index()
-	{
-		return View();
 	}
 
 	[Route("/block")]
@@ -48,13 +51,13 @@ public class AccountController : Controller
 			statusCode: StatusCodes.Status403Forbidden,
 			instance: HttpContext.Request.Path
 		);
-		return View("Index");
 	}
 
 	[Route("/logout")]
-	public async Task Logout()
+	public async Task<ActionResult> Logout()
 	{
 		await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+		return RedirectToAction("Login");
 	}
 
 	private async Task Authenticate(ServiceUser user)
