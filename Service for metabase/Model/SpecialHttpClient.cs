@@ -1,4 +1,4 @@
-﻿namespace EntityLib;
+﻿namespace Service_for_metabase.Model;
 
 public static class SpecialHttpClient
 {

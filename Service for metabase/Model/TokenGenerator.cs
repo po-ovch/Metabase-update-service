@@ -11,12 +11,12 @@ public static class TokenGenerator
 		var now = DateTime.UtcNow;
 		
 		var jwt = new JwtSecurityToken(
-			AuthenticationOptions.Issuer,
-			AuthenticationOptions.Audience,
+			JwtAuthenticationOptions.Issuer,
+			JwtAuthenticationOptions.Audience,
 			notBefore: now,
 			claims: claims,
-			expires: now.Add(TimeSpan.FromMinutes(AuthenticationOptions.Lifetime)),
-			signingCredentials: new SigningCredentials(AuthenticationOptions.GetSymmetricSecurityKey(),
+			expires: now.Add(TimeSpan.FromMinutes(JwtAuthenticationOptions.Lifetime)),
+			signingCredentials: new SigningCredentials(JwtAuthenticationOptions.GetSymmetricSecurityKey(),
 				SecurityAlgorithms.HmacSha256));
 		var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 

@@ -18,7 +18,7 @@ namespace Service_for_metabase.Controllers
             _metabaseContext = metabaseContext;
         }
         
-        public ActionResult Index()
+        public IActionResult Index()
         {
             return View();
         }
@@ -41,7 +41,8 @@ namespace Service_for_metabase.Controllers
             }
             catch
             {
-                return NotFound();
+                return Problem(detail: "Problem with access to Metabase DBInfo",
+                    statusCode: StatusCodes.Status500InternalServerError);
             }
 
             var dbServicesUrls = databases
@@ -60,8 +61,8 @@ namespace Service_for_metabase.Controllers
                 }
             }
 
-            ViewBag.PropertiesTableModel = TableModel<MetabaseProperty>.BuildModel(updatedProperties);
-            ViewBag.SystemsTableModel = TableModel<MetabaseSystem>.BuildModel(updatedSystems);
+            ViewBag.PropertiesTableModel = TableDto<MetabaseProperty>.BuildModel(updatedProperties);
+            ViewBag.SystemsTableModel = TableDto<MetabaseSystem>.BuildModel(updatedSystems);
             ViewBag.UnsuccessfulUpdates = databases
                 .Where(db => unsuccessfulUpdatesUrls.Contains(db.DBServiceHost!))
                 .Select(db => db.Name);
@@ -73,7 +74,17 @@ namespace Service_for_metabase.Controllers
         public async Task<IActionResult> GetActivatedServices()
         {
             var activeServices = new List<string>();
-            var databases = await _metabaseContext.DBInfo.ToListAsync();
+            List<MetabaseDb> databases;
+            try
+            {
+                databases = await _metabaseContext.DBInfo.ToListAsync();
+            }
+            catch
+            {
+                return Problem(detail: "Problem with access to Metabase DBInfo",
+                    statusCode: StatusCodes.Status500InternalServerError);
+            }
+
             const string checkEndpoint = "/check";
             
             using var client = SpecialHttpClient.GetHttpClient();
@@ -95,9 +106,9 @@ namespace Service_for_metabase.Controllers
                 }
             }
 
-            ViewBag.TableModel = TableModel<DatabaseModel>.BuildModel(databases
+            ViewBag.TableModel = TableDto<MetabaseDbDto>.BuildModel(databases
                 .Where(db => activeServices.Contains(db.DBServiceHost))
-                .Select(DatabaseModel.FromMetabaseDb));
+                .Select(MetabaseDbDto.FromMetabaseDb));
             return View("ShowActiveServices");
         }
 
@@ -111,10 +122,11 @@ namespace Service_for_metabase.Controllers
             }
             catch
             {
-                return NotFound();
+                return Problem(detail: "Problem with access to Metabase PropertiesInfo",
+                    statusCode: StatusCodes.Status500InternalServerError);
             }
 
-            ViewBag.TableModel = TableModel<MetabaseProperty>.BuildModel(properties);
+            ViewBag.TableModel = TableDto<MetabaseProperty>.BuildModel(properties);
             return View("ShowInfo");
         }
         
@@ -128,10 +140,11 @@ namespace Service_for_metabase.Controllers
             }
             catch
             {
-                return NotFound();
+                return Problem(detail: "Problem with access to Metabase SystemInfo",
+                    statusCode: StatusCodes.Status500InternalServerError);
             }
 
-            ViewBag.TableModel = TableModel<MetabaseSystem>.BuildModel(systems);
+            ViewBag.TableModel = TableDto<MetabaseSystem>.BuildModel(systems);
             return View("ShowInfo");
         }
 
@@ -141,12 +154,7 @@ namespace Service_for_metabase.Controllers
             var dbProperties = await (await client.GetAsync(dbUrl))
                 .Content
                 .ReadFromJsonAsync<List<MetabaseProperty>>();
-            
-            if (dbProperties is null)
-            {
-                throw new Exception();
-            }
-            
+
             var metabaseProperties = await _metabaseContext.PropertiesInfo.ToListAsync();
             var propsToAdd = dbProperties
                 .Where(prop => !metabaseProperties.Contains(prop));
@@ -178,11 +186,6 @@ namespace Service_for_metabase.Controllers
                 .Content
                 .ReadFromJsonAsync<List<MetabaseSystem>>();
 
-            if (dbSystems is null)
-            {
-                throw new Exception();
-            }
-            
             var metabaseSystems = await _metabaseContext.SystemInfo.ToListAsync();
             var systemsToAdd = dbSystems
                 .Where(sys => !metabaseSystems.Contains(sys));

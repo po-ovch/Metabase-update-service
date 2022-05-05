@@ -3,7 +3,7 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace Service_for_metabase.Model;
 
-public static class AuthenticationOptions
+public static class JwtAuthenticationOptions
 {
 	public const string Issuer = "MetabaseService";
 	public const string Audience = "DatabaseService";

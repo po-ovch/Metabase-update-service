@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Service_for_metabase.Model;
 
-public class ServiceUserModel
+public class ServiceUserDto
 {
 	[Required(ErrorMessage = "Не указано имя пользователя")]
 	public string Username { get; set; }

@@ -20,7 +20,7 @@ public class AccountController : Controller
 	}
 	
 	[HttpPost("/login")]
-	public async Task<IActionResult> Login(ServiceUserModel userModel)
+	public async Task<IActionResult> Login(ServiceUserDto userDto)
 	{
 		if (User.Identity is {IsAuthenticated: true})
 		{
@@ -31,33 +31,34 @@ public class AccountController : Controller
 			ServiceUser? user;
 			try
 			{
-				user = GetUser(userModel.Username, userModel.Password);
+				user = GetUser(userDto.Username, userDto.Password);
 			}
 			catch
 			{
-				return NotFound();
+				return Problem(detail: "Problem with access to users information",
+					statusCode: StatusCodes.Status500InternalServerError);
 			}
 
 			if (user is not null)
 			{
-				await Authenticate(user);
+				await SignUserIn(user);
 				return RedirectToAction("Index", "Metabase");
 			}
 			ModelState.AddModelError("", "Некорректные имя пользователя" +
 			                             " и(или) пароль");
 		}
 
-		return View(userModel);
+		return View(userDto);
 	}
 
 	[Route("/logout")]
-	public async Task<ActionResult> Logout()
+	public async Task<IActionResult> Logout()
 	{
 		await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 		return RedirectToAction("Login");
 	}
 
-	private async Task Authenticate(ServiceUser user)
+	private async Task SignUserIn(ServiceUser user)
 	{
 		var claims = new List<Claim>
 		{

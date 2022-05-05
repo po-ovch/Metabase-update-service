@@ -1,6 +1,6 @@
 namespace Service_for_metabase.Model;
 
-public class DatabaseModel
+public class MetabaseDbDto
 {
 	public int DBID { get; set; }
 	
@@ -11,16 +11,19 @@ public class DatabaseModel
 	public string Language { get; set; }
 	
 	public string Description { get; set; }
+	
+	public string? ServiceHost { get; set; }
 
-	public static DatabaseModel FromMetabaseDb(MetabaseDb metabaseDb)
+	public static MetabaseDbDto FromMetabaseDb(MetabaseDb metabaseDb)
 	{
-		return new DatabaseModel()
+		return new MetabaseDbDto()
 		{
 			DBID = metabaseDb.DBID,
 			Name = metabaseDb.Name,
 			EmailManager = metabaseDb.EmailManager,
 			Language = metabaseDb.Language,
-			Description = metabaseDb.Description
+			Description = metabaseDb.Description,
+			ServiceHost = metabaseDb.DBServiceHost
 		};
 	} 
 }

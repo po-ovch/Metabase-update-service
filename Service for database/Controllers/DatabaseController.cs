@@ -26,11 +26,9 @@ namespace Service_for_database.Controllers
             catch (Exception exception)
             {
                 return Problem(
-                    type: exception.GetType().ToString(),
-                    title: "Data base connection problem.",
                     detail: exception.Message,
-                    statusCode: StatusCodes.Status404NotFound,
-                    instance: HttpContext.Request.Path
+                    title: "Data base connection problem.",
+                    statusCode: StatusCodes.Status500InternalServerError
                 );
             }
 
