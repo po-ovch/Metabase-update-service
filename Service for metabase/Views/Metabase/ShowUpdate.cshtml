@@ -7,7 +7,7 @@
 
 <h2>Результаты обновления метабазы</h2>
 
-@if (Enumerable.Count(ViewBag.UnsuccessfulUpdates)> 0)
+@if (Enumerable.Count(ViewBag.UnsuccessfulUpdates) > 0)
 {
     <p>Не получилось взять обновления из следующих баз данных:</p>
     <ul>
@@ -16,6 +16,12 @@
             <li style="color: red">@mistake</li>
         }
     </ul>
+}
+
+@if (Enumerable.Count(ViewBag.PropertiesTableModel.Items) == 0 &&
+     Enumerable.Count(ViewBag.SystemsTableModel.Items) == 0)
+{
+    <h3>Обновлений нет</h3>
 }
 
 @if (Enumerable.Count(ViewBag.PropertiesTableModel.Items) > 0)

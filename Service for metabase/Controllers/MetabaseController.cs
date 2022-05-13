@@ -127,6 +127,7 @@ namespace Service_for_metabase.Controllers
             }
 
             ViewBag.TableModel = TableDto<MetabaseProperty>.BuildModel(properties);
+            ViewBag.TableName = "Список свойств";
             return View("ShowInfo");
         }
         
@@ -145,6 +146,7 @@ namespace Service_for_metabase.Controllers
             }
 
             ViewBag.TableModel = TableDto<MetabaseSystem>.BuildModel(systems);
+            ViewBag.TableName = "Список систем";
             return View("ShowInfo");
         }
 

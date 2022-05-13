@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityLib", "EntityLib\Enti
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Service for metabase", "Service for metabase\Service for metabase.csproj", "{0A2A4A9C-4E2D-404A-91CC-244BE5E2C12C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Db-service-copy", "Db-service-copy\Db-service-copy.csproj", "{0480DC05-1E2E-4AAA-BBBE-1C519C56FB7B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{0A2A4A9C-4E2D-404A-91CC-244BE5E2C12C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A2A4A9C-4E2D-404A-91CC-244BE5E2C12C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A2A4A9C-4E2D-404A-91CC-244BE5E2C12C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0480DC05-1E2E-4AAA-BBBE-1C519C56FB7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0480DC05-1E2E-4AAA-BBBE-1C519C56FB7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0480DC05-1E2E-4AAA-BBBE-1C519C56FB7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0480DC05-1E2E-4AAA-BBBE-1C519C56FB7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
